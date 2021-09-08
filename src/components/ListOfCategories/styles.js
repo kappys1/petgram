@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { fadeIn } from '../../styles/animations'
 
 export const List = styled.ul`
   display: flex;
@@ -17,6 +18,7 @@ export const List = styled.ul`
     top: -20px;
     transform: scale(.5);
     z-index: 1;
+    ${fadeIn({ time: '.5s' })}
   }
     
 `

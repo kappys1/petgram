@@ -1,7 +1,21 @@
-## curso-platzi-react-avanzado ⚛️
+# PetGram! 
 
-**¡Sígueme en Youtube para más contenido de React y Javascript!** 👉 https://www.youtube.com/midudev
+Amazing App for cat lovers.
 
-**¡Sígueme en Twitch para streams sobre desarrollo web!** 👉 https://www.twitch.tv/midudev
+## Stack
+- React.js
+- webpack (v5)
+- standard & prettier
+- GraphQL & Apollo
+- Reach Router
+- Lighthouse & cypres
+- vercel
+
+
+
+## Resource
+### curso-platzi-react-avanzado ⚛️
 
 Repositorio con el código del [Curso Avanzado de React de Platzi](https://platzi.com/cursos/react-avanzado/)
+
+ **Amazing course teacher: @midudev**

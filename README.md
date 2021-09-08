@@ -1,6 +1,7 @@
 # PetGram! 
 
-Amazing App for cat lovers.
+Amazing application about cats simulating the instagram interface.
+
 
 ## Stack
 - React.js

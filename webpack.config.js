@@ -1,8 +1,9 @@
 // webpack.config.js
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+
 const webpack = require('webpack')
 module.exports = {
-  mode: 'none',
+  mode: 'development',
   output: {
     filename: 'app.bundle.js'
   },

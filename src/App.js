@@ -8,9 +8,10 @@ import { NavBar } from './components/NavBar'
 import { Favs } from './pages/Favs'
 import { User } from './pages/User'
 import { NotRegisterUser } from './pages/NotRegisterUser'
-import Context from './Context'
+import { useStateValue } from './Context'
 
 export const App = () => {
+  const [{ isAuth }] = useStateValue()
   return (
     <div>
       <GlobalStyle />
@@ -21,22 +22,19 @@ export const App = () => {
         <Detail path='/detail/:detailId' />
 
       </Router>
-      <Context.Consumer>
-        {
-          ({ isAuth }) =>
-            isAuth
-              ? (
-                <Router>
-                  <Favs path='/favs' />
-                  <User path='/user' />
-                </Router>)
-              : (
-                <Router>
-                  <NotRegisterUser path='/favs' />
-                  <NotRegisterUser path='/user' />
-                </Router>)
+      {
+      isAuth
+        ? (
+          <Router>
+            <Favs path='/favs' />
+            <User path='/user' />
+          </Router>)
+        : (
+          <Router>
+            <NotRegisterUser path='/favs' />
+            <NotRegisterUser path='/user' />
+          </Router>)
         }
-      </Context.Consumer>
       <NavBar />
     </div>
   )

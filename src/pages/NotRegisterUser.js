@@ -1,4 +1,5 @@
 import React from 'react'
+import { UserForm } from '../components/UserForm'
 import { useStateValue } from '../Context'
 
 export const NotRegisterUser = () => {
@@ -9,8 +10,6 @@ export const NotRegisterUser = () => {
     })
   }
   return (
-    <form onSubmit={handleOnSubmit}>
-      <button>iniciar sesión</button>
-    </form>
+    <UserForm onSubmit={handleOnSubmit} />
   )
 }

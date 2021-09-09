@@ -2,12 +2,12 @@ import React, { createContext, useReducer, useContext } from 'react'
 const Context = createContext()
 
 const initialState = {
-  isAuth: false
+  isAuth: window.sessionStorage.getItem('token')
 }
-
 const reducer = (state, action) => {
   switch (action.type) {
     case 'activeAuth':
+      window.sessionStorage.setItem('token', action.token)
       return {
         ...state,
         isAuth: true

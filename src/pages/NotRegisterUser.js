@@ -12,8 +12,13 @@ export const NotRegisterUser = () => {
   const submitRegisterLogin = (fn, { email, password }) => {
     const input = { email, password }
     const variables = { input }
-    fn({ variables }).then(() => dispatch({ type: 'activeAuth' }))
+    fn({ variables }).then(({ data }) => {
+      let token = ''
+      token = fn === register ? data.signup : data.login
+      dispatch({ type: 'activeAuth', token })
+    })
   }
+
   const handleOnSubmitLogin = (input) => {
     submitRegisterLogin(login, input)
   }

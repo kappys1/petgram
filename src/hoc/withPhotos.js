@@ -9,6 +9,7 @@ query getPhotos($categoryId: ID){
     src
     userId
     liked
+    likes
   }
 }
 `

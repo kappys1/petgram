@@ -12,7 +12,12 @@ const reducer = (state, action) => {
         ...state,
         isAuth: true
       }
-
+    case 'removeAuth':
+      window.sessionStorage.removeItem('token')
+      return {
+        ...state,
+        isAuth: false
+      }
     default:
       return state
   }

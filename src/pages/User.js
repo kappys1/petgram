@@ -1,4 +1,5 @@
 import React from 'react'
+import { Layout } from '../components/Layout'
 import { SubmitButton } from '../components/SubmitButton'
 import { useStateValue } from '../Context'
 
@@ -7,9 +8,8 @@ export const User = () => {
 
   const handleOnClick = () => dispatch({ type: 'removeAuth' })
   return (
-    <>
-      <h1>User</h1>
+    <Layout title='User' subtitle='esta es tu cuenta'>
       <SubmitButton onClick={handleOnClick}>cerrar sesión</SubmitButton>
-    </>
+    </Layout>
   )
 }

@@ -1,26 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { useCategoriesData } from '../../hooks/useCategories'
 import { Category } from '../Catergory'
 import { List, Item } from './styles'
-// import db from '../../../api/db.json'
 
-function useCategoriesData () {
-  const [categories, setCategories] = useState([])
-  const [loading, setLoading] = useState(false)
-
-  useEffect(function () {
-    setLoading(true)
-    window.fetch('https://petgram-server-kappys-5p5zyiegt-kappys1.vercel.app/categories')
-      .then(res => res.json())
-      .then(response => {
-        setLoading(false)
-        setCategories(response)
-      })
-  }, [])
-
-  return { categories, loading }
-}
-
-export const ListOfCategories = () => {
+const ListOfCategoriesComponents = () => {
   const { categories, loading } = useCategoriesData()
   const [showFixed, setShowFixed] = useState(false)
 
@@ -53,3 +36,5 @@ export const ListOfCategories = () => {
     </>
   )
 }
+
+export const ListOfCategories = React.memo(ListOfCategoriesComponents)

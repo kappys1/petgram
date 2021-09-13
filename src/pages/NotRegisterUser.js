@@ -4,7 +4,8 @@ import { useStateValue } from '../Context'
 import { useLogin } from '../hooks/useLogin'
 import { useRegister } from '../hooks/useRegister'
 
-export const NotRegisterUser = () => {
+// No named export // Not Registered User
+export default () => {
   const [, dispatch] = useStateValue()
   const { register, error, loading } = useRegister()
   const { login, error: errorLogin, loading: loadingLogin } = useLogin()

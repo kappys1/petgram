@@ -3,7 +3,8 @@ import { Layout } from '../components/Layout'
 import { SubmitButton } from '../components/SubmitButton'
 import { useStateValue } from '../Context'
 
-export const User = () => {
+// no named export - user page
+export default () => {
   const [, dispatch] = useStateValue()
 
   const handleOnClick = () => dispatch({ type: 'removeAuth' })

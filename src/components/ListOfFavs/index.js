@@ -9,7 +9,7 @@ export const ListOfFavs = ({ favs = [] }) => {
       {
         favs.map(fav =>
           <Link key={fav.id} to={`/detail/${fav.id}`}>
-            <Image src={fav.src} />
+            <Image src={fav.src} alt={`images favs ${fav.id}`} />
           </Link>
         )
       }

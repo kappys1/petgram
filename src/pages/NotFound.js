@@ -1,5 +1,6 @@
 import React from 'react'
 
-export const NotFound = () => {
+// no named export - notfound page
+export default () => {
   return <h1>Esta Página no existe! :(</h1>
 }

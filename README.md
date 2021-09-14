@@ -15,8 +15,9 @@
 
 ## Light house
 <p align="center">
-<img src="https://res.cloudinary.com/kappys/image/upload/v1631631605/petgram/readme/Captura_de_pantalla_2021-09-14_a_las_16.58.52_yl0gtn.png" alt="drawing" width="250"/>
+<img src="https://res.cloudinary.com/kappys/image/upload/v1631631605/petgram/readme/Captura_de_pantalla_2021-09-14_a_las_16.58.52_yl0gtn.png" alt="drawing" width="300"/>
 </p>
+
 ## Stack
 
 ##### technology

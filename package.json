@@ -7,7 +7,7 @@
     "test": "cypress open",
     "build": "webpack --config webpack.prod.js",
     "lint": "standard",
-    "serve:dev": "webpack --mode 'development' --config webpack.prod.js && npx serve dist -s",
+    "serve:dev": "webpack --mode 'production' --config webpack.prod.js && npx serve dist -s",
     "dev": "webpack-dev-server --config webpack.dev.js",
     "now-build": "npm run build",
     "prepare": "husky install"

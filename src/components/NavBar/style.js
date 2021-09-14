@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { Link as LinkRouter } from '@reach/router'
 import { fadeIn } from '../../styles/animations'
+import { breakpoints } from '../../styles/breakpoints'
 export const Nav = styled.nav`
   align-items: center;
   background: #fcfcfc;
@@ -11,7 +12,7 @@ export const Nav = styled.nav`
   justify-content: space-around;
   left: 0;
   margin: 0 auto;
-  max-width: 500px;
+  max-width: ${breakpoints.tablet};
   position: fixed;
   right: 0;
   width: 100%;

@@ -2,27 +2,19 @@
 // webpack.config.js
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const WebpackPwaManifest = require('webpack-pwa-manifest')
-const WorkBoxWebpackPlugin = require('workbox-webpack-plugin')
 
 const path = require('path')
-const webpack = require('webpack')
 
 module.exports = {
-  mode: 'development',
+  devtool: 'source-map',
   output: {
     filename: 'app.bundle.js',
-    publicPath: '/'
+    publicPath: '/',
+    clean: true
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'src/index.html'
-    }),
-    new webpack.SourceMapDevToolPlugin({
-      filename: '[name].js.map',
-      exclude: ['vendor.js']
-    }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
     }),
     new WebpackPwaManifest({
       name: 'PetGram tu app de fotos de mascotas',
@@ -38,31 +30,20 @@ module.exports = {
         {
           src: path.resolve('src/assets/icon.png'),
           sizes: [96, 128, 192, 256, 384, 512]
-        }
-      ]
-    }),
-    new WorkBoxWebpackPlugin.GenerateSW({
-      clientsClaim: true,
-      skipWaiting: true,
-      maximumFileSizeToCacheInBytes: 5000000,
-      runtimeCaching: [
-        {
-          urlPattern: new RegExp('https://(res.cloudinary.com|images.unsplash.com)'),
-          handler: 'CacheFirst',
-          options: {
-            cacheName: 'images'
-          }
         },
         {
-          urlPattern: new RegExp('https://petgram-henna-alpha.vercel.app'),
-          handler: 'NetworkFirst',
-          options: {
-            cacheName: 'api'
-          }
+          src: path.resolve('src/assets/maskable-icon.png'),
+          size: '1024x1024',
+          purpose: 'maskable'
         }
       ]
     })
   ],
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000
+  },
   module: {
     rules: [
       {
@@ -74,6 +55,10 @@ module.exports = {
             presets: ['@babel/preset-env', '@babel/preset-react']
           }
         }
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource'
       }
     ]
   }

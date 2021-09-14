@@ -12,6 +12,21 @@ to {
 }
 `
 
+const iconSpinFrames = keyframes`
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+  }
+`
+
 export const fadeIn = ({ time = '1s', type = 'ease' } = {}) => css`
   animation: ${time} ${fadeInKeyframes} ${type};
+`
+
+export const iconSpin = ({ time = '1s', type = 'infinite' } = {}) => css`
+  animation: ${time} ${iconSpinFrames} ${type} linear;
 `

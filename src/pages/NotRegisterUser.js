@@ -37,8 +37,8 @@ export default ({ path }) => {
     <SectionOut>
       <ImageLogin />
       <div>
-        {!isLogin && <UserForm error={errorRegisterMsg} disabled={loading} onSubmit={handleOnSubmitRegister} title='Registrar' />}
-        {isLogin && <UserForm error={errorLoginMsg} disabled={loadingLogin} onSubmit={handleOnSubmitLogin} title='Inicia sesion' />}
+        {!isLogin && <UserForm error={errorRegisterMsg} disabled={loading} onSubmit={handleOnSubmitRegister} title='Registrar' isLoading={loading} />}
+        {isLogin && <UserForm error={errorLoginMsg} disabled={loadingLogin} onSubmit={handleOnSubmitLogin} title='Inicia sesion' isLoading={loadingLogin} />}
         <UserFormRedirect isLogin={isLogin} />
       </div>
     </SectionOut>

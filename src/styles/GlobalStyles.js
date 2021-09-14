@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import { breakpoints } from './breakpoints'
 
 export const GlobalStyle = createGlobalStyle`
   html {
@@ -29,15 +30,23 @@ export const GlobalStyle = createGlobalStyle`
     background: #fefefe;
     height: 100vh;
     margin: 0 auto;
-    max-width: 500px;
+    max-width: ${breakpoints.tablet};
     overscroll-behavior: none;
     width: 100%;
   }
 
   #app {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     overflow-x: hidden;
     min-height: 100vh;
+    height: 100%;
     padding-bottom: 10px;
+    & > div {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
   }
 `

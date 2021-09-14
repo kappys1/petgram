@@ -12,26 +12,33 @@ const User = React.lazy(() => import('./pages/User'))
 const NotFound = React.lazy(() => import('./pages/NotFound'))
 const NotRegisterUser = React.lazy(() => import('./pages/NotRegisterUser'))
 
+const authRoutes = [
+  '/favs',
+  '/user',
+  '/',
+  '/pet',
+  '/detail'
+]
 export const App = () => {
   const [{ isAuth }] = useStateValue()
   return (
     <Suspense fallback={<div />}>
       <GlobalStyle />
-      <Logo />
+      {isAuth && <Logo />}
       <Router>
         <NotFound default />
+        {!isAuth && <NotRegisterUser path='/signup' />}
+        {!isAuth && <NotRegisterUser path='/login' />}
+        {authRoutes.map(route => !isAuth && <Redirect key={route} noThrow from={route} to='/login' />)}
+        {isAuth && <Redirect noThrow from='/login' to='/' />}
+        {isAuth && <Redirect noThrow from='/signup' to='/' />}
         <Home path='/' />
         <Home path='/pet/:categoryId' />
         <Detail path='/detail/:detailId' />
-        {!isAuth && <NotRegisterUser path='/login' />}
-        {!isAuth && <Redirect noThrow from='/favs' to='/login' />}
-        {!isAuth && <Redirect noThrow from='/user' to='/login' />}
-        {isAuth && <Redirect noThrow from='/login' to='/' />}
         <Favs path='/favs' />
         <User path='/user' />
-
       </Router>
-      <NavBar />
+      {isAuth && <NavBar />}
     </Suspense>
   )
 }

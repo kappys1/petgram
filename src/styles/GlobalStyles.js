@@ -29,7 +29,7 @@ export const GlobalStyle = createGlobalStyle`
     background: #fefefe;
     height: 100vh;
     margin: 0 auto;
-    max-width: 500px;
+    max-width: 1024px;
     overscroll-behavior: none;
     width: 100%;
   }
@@ -39,5 +39,9 @@ export const GlobalStyle = createGlobalStyle`
     overflow-x: hidden;
     min-height: 100vh;
     padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 `

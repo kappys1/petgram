@@ -6,8 +6,9 @@ border-radius: 3px;
 color: #fff;
 height: 32px;
 display: block;
-width: 100%;
+width: 50%;
 text-align: center;
+margin: 0.5em auto 0px;
 &[disabled] {
   opacity: .3;
 }

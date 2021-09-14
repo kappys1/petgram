@@ -43,5 +43,8 @@ export const GlobalStyle = createGlobalStyle`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    & > div {
+      width: 100%;
+    }
   }
 `

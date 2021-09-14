@@ -4,7 +4,7 @@ import { Logo } from '../Logo'
 import { SubmitButton } from '../SubmitButton'
 import { Form, Input, Title, Error } from './styles'
 
-export const UserForm = ({ onSubmit, title, error, disabled }) => {
+export const UserForm = ({ onSubmit, title, error, disabled, isLoading }) => {
   const email = useInputValue('')
   const password = useInputValue('')
   const handleOnSubmit = (e) => {
@@ -27,7 +27,7 @@ export const UserForm = ({ onSubmit, title, error, disabled }) => {
         <Input disabled={disabled} placeholder='Email' {...email} type='email' />
         <Input disabled={disabled} placeholder='Password' type='password' {...password} />
         {error && <Error>{error}</Error>}
-        <SubmitButton disabled={isButtonDisabled()}>{title}</SubmitButton>
+        <SubmitButton disabled={isButtonDisabled()} isLoading={isLoading}>{title}</SubmitButton>
       </Form>
 
     </>

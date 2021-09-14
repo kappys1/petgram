@@ -20,7 +20,7 @@ export const Link = styled(LinkRouter)`
   margin: 0px;
   font-size: 0.8em;  
   & b {
-    color: rgba(var(--d69,0,149,246),1);
+    color: #8d00ff;
     font-weight: bold; 
   }
 `

@@ -12,8 +12,7 @@
 [Demo](petgram-kappys1.vercel.app/) 🐶
 ## Stack
 
-##### Technology
-
+##### technology
 - React.js
 - GraphQL & Apollo
 - Reach Router
@@ -23,6 +22,7 @@
 - SPA
 - PWA
 - mobile first application
+
 ##### bundler
   - webpack (v5)
   - babel

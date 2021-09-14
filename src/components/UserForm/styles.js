@@ -36,12 +36,13 @@ export const Input = styled.input`
 `
 
 export const Title = styled.h2`
-  margin-bottom: 1.5em;
+  margin-bottom: .5em;
   font-size: 1.2em;
   font-weight: 500;
   padding: 8px 0;
 `
 export const Error = styled.span`
   color: red;
-  font-size: 14px;
+  font-size: .8rem;
+  margin: 1rem 0;
 `

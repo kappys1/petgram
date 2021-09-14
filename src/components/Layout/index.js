@@ -1,7 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { Title } from '../UserForm/styles'
-import { Div, Subtitle } from './styles'
+import { Title, SectionInApp } from './styles'
 
 export const Layout = ({ children, title, subtitle }) => {
   return (
@@ -10,11 +9,10 @@ export const Layout = ({ children, title, subtitle }) => {
         {title && <title>{title} | petgram 🐶</title>}
         {subtitle && <meta name='description' content={subtitle} />}
       </Helmet>
-      <Div>
+      <SectionInApp>
         {title && <Title>{title}</Title>}
-        {subtitle && <Subtitle>{subtitle}</Subtitle>}
         {children}
-      </Div>
+      </SectionInApp>
     </>
   )
 }

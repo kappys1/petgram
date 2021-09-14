@@ -8,7 +8,7 @@ height: 32px;
 display: block;
 width: 50%;
 text-align: center;
-margin: 0.5em auto 0px;
+margin: 1em auto 0px;
 &[disabled] {
   opacity: .3;
 }

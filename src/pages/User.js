@@ -9,8 +9,8 @@ export default () => {
 
   const handleOnClick = () => dispatch({ type: 'removeAuth' })
   return (
-    <Layout title='User' subtitle='esta es tu cuenta'>
-      <SubmitButton onClick={handleOnClick}>cerrar sesión</SubmitButton>
+    <Layout title='User' subtitle='Aqui puedes cerrar sessión'>
+      <SubmitButton onClick={handleOnClick}>Cerrar sesión</SubmitButton>
     </Layout>
   )
 }

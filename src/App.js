@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react'
 import { GlobalStyle } from './styles/GlobalStyles'
 import { Logo } from './components/Logo'
-import { Home } from './pages/Home'
 import { Redirect, Router } from '@reach/router'
 import { NavBar } from './components/NavBar'
 import { useStateValue } from './Context'
@@ -11,6 +10,7 @@ const Detail = React.lazy(() => import('./pages/Detail'))
 const User = React.lazy(() => import('./pages/User'))
 const NotFound = React.lazy(() => import('./pages/NotFound'))
 const NotRegisterUser = React.lazy(() => import('./pages/NotRegisterUser'))
+const Home = React.lazy(() => import('./pages/Home'))
 
 const authRoutes = [
   '/favs',

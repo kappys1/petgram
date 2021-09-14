@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import { fadeIn } from '../../styles/animations'
+import { breakpoints } from '../../styles/breakpoints'
 
 export const List = styled.ul`
   display: flex;
@@ -12,7 +13,7 @@ export const List = styled.ul`
     box-shadow: 0 0 20px rgba(0,0,0,0.3);
     left:0;
     margin: 0 auto;
-    max-width: 400px;
+    max-width: ${breakpoints.tablet};
     padding: 5px;
     position: fixed;
     right: 0;

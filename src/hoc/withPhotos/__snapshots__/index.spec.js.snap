@@ -2,6 +2,8 @@
 
 exports[`withPhotos snapshot 1`] = `
 <DocumentFragment>
-  <withphotos />
+  <div>
+    test
+  </div>
 </DocumentFragment>
 `;

@@ -18,13 +18,13 @@ describe('PhotoCardWithQuery', () => {
         }
       }
     ]
-    const { asFragment } = render(
+    const res = render(
       <Provider>
         <MockedProvider mocks={mocks} addTypename={false}>
           <PhotoCardWithQuery />
         </MockedProvider>
       </Provider>
     )
-    expect(asFragment()).toMatchSnapshot()
+    expect(res.asFragment()).toMatchSnapshot()
   })
 })

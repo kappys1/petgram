@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client'
 import { gql } from 'apollo-boost'
 
-const REGISTER = gql`
+export const REGISTER = gql`
   mutation signup ($input: UserCredentials!) {
     signup (input: $input)
   }

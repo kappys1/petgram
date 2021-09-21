@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="17" failures="0" errors="0" time="8.553">
+  <testsuite name="Layout" errors="0" failures="0" skipped="0" timestamp="2021-09-21T11:34:27" time="3.48" tests="1">
+    <testcase classname="Layout snapshot" name="Layout snapshot" time="0.105">
+    </testcase>
+  </testsuite>
+  <testsuite name="ListOfCategories" errors="0" failures="0" skipped="0" timestamp="2021-09-21T11:34:27" time="3.58" tests="1">
+    <testcase classname="ListOfCategories snapshot" name="ListOfCategories snapshot" time="0.249">
+    </testcase>
+  </testsuite>
+  <testsuite name="ListOfFavs" errors="0" failures="0" skipped="0" timestamp="2021-09-21T11:34:27" time="3.534" tests="1">
+    <testcase classname="ListOfFavs snapshot" name="ListOfFavs snapshot" time="0.079">
+    </testcase>
+  </testsuite>
+  <testsuite name="Category" errors="0" failures="0" skipped="0" timestamp="2021-09-21T11:34:27" time="3.52" tests="1">
+    <testcase classname="Category snapshot" name="Category snapshot" time="0.1">
+    </testcase>
+  </testsuite>
+  <testsuite name="PhotoCard" errors="0" failures="0" skipped="0" timestamp="2021-09-21T11:34:27" time="4.136" tests="1">
+    <testcase classname="PhotoCard snapshot" name="PhotoCard snapshot" time="0.097">
+    </testcase>
+  </testsuite>
+  <testsuite name="ListOfPhotoCardsComponent" errors="0" failures="0" skipped="0" timestamp="2021-09-21T11:34:27" time="4.251" tests="1">
+    <testcase classname="ListOfPhotoCardsComponent snapshot" name="ListOfPhotoCardsComponent snapshot" time="0.092">
+    </testcase>
+  </testsuite>
+  <testsuite name="ListOfFavs" errors="0" failures="0" skipped="0" timestamp="2021-09-21T11:34:27" time="4.286" tests="1">
+    <testcase classname="ListOfFavs snapshot" name="ListOfFavs snapshot" time="0.237">
+    </testcase>
+  </testsuite>
+  <testsuite name="UserForm" errors="0" failures="0" skipped="0" timestamp="2021-09-21T11:34:31" time="0.771" tests="1">
+    <testcase classname="UserForm snapshot" name="UserForm snapshot" time="0.238">
+    </testcase>
+  </testsuite>
+  <testsuite name="PhotoCardWithQuery" errors="0" failures="0" skipped="0" timestamp="2021-09-21T11:34:30" time="1.408" tests="1">
+    <testcase classname="PhotoCardWithQuery snapshot" name="PhotoCardWithQuery snapshot" time="0.064">
+    </testcase>
+  </testsuite>
+  <testsuite name="ListOfPhotoCards" errors="0" failures="0" skipped="0" timestamp="2021-09-21T11:34:30" time="1.368" tests="1">
+    <testcase classname="ListOfPhotoCards snapshot" name="ListOfPhotoCards snapshot" time="0.071">
+    </testcase>
+  </testsuite>
+  <testsuite name="NavBar" errors="0" failures="0" skipped="0" timestamp="2021-09-21T11:34:31" time="0.796" tests="1">
+    <testcase classname="NavBar snapshot" name="NavBar snapshot" time="0.091">
+    </testcase>
+  </testsuite>
+  <testsuite name="SubmitButton" errors="0" failures="0" skipped="0" timestamp="2021-09-21T11:34:31" time="0.706" tests="1">
+    <testcase classname="SubmitButton snapshot" name="SubmitButton snapshot" time="0.036">
+    </testcase>
+  </testsuite>
+  <testsuite name="ToggleLikeMutation" errors="0" failures="0" skipped="0" timestamp="2021-09-21T11:34:30" time="1.46" tests="1">
+    <testcase classname="ToggleLikeMutation snapshot" name="ToggleLikeMutation snapshot" time="0.158">
+    </testcase>
+  </testsuite>
+  <testsuite name="FavButton" errors="0" failures="0" skipped="0" timestamp="2021-09-21T11:34:31" time="0.477" tests="1">
+    <testcase classname="FavButton snapshot" name="FavButton snapshot" time="0.016">
+    </testcase>
+  </testsuite>
+  <testsuite name="ImageLogin" errors="0" failures="0" skipped="0" timestamp="2021-09-21T11:34:31" time="0.536" tests="1">
+    <testcase classname="ImageLogin snapshot" name="ImageLogin snapshot" time="0.06">
+    </testcase>
+  </testsuite>
+  <testsuite name="UserFormRedirect" errors="0" failures="0" skipped="0" timestamp="2021-09-21T11:34:32" time="0.359" tests="1">
+    <testcase classname="UserFormRedirect snapshot" name="UserFormRedirect snapshot" time="0.021">
+    </testcase>
+  </testsuite>
+  <testsuite name="Logo" errors="0" failures="0" skipped="0" timestamp="2021-09-21T11:34:32" time="0.424" tests="1">
+    <testcase classname="Logo snapshot" name="Logo snapshot" time="0.043">
+    </testcase>
+  </testsuite>
+</testsuites>

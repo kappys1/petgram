@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListOfCategories snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    class="sc-dlfnuX iqGdQY"
+  />
+</DocumentFragment>
+`;

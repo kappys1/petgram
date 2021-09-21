@@ -5,10 +5,9 @@ const config = require('./webpack.config.js')
 const WorkBoxWebpackPlugin = require('workbox-webpack-plugin')
 
 module.exports = merge(config, {
+  mode: 'production',
+  devtool: 'source-map',
   plugins: [
-    // new webpack.DefinePlugin({
-    //   'process.env.NODE_ENV': JSON.stringify('production')
-    // }),
     new WorkBoxWebpackPlugin.GenerateSW({
       mode: 'development',
       skipWaiting: true,
@@ -32,6 +31,5 @@ module.exports = merge(config, {
       ]
     })
 
-  ],
-  mode: 'production'
+  ]
 })

@@ -1,10 +1,10 @@
 import React from 'react'
-import { useQuery } from 'react-apollo'
+import { useQuery } from '@apollo/client'
 import { gql } from 'apollo-boost'
-import { ListOfFavs } from '../components/ListOfFavs'
-import { useStateValue } from '../Context'
+import { ListOfFavs } from '../../components/ListOfFavs'
+import { useStateValue } from '../../Context'
 
-const GET_FAVS = gql`
+export const GET_FAVS = gql`
 query getFavs{
   favs{
     id

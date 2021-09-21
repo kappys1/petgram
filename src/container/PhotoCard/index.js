@@ -1,7 +1,8 @@
 import React from 'react'
 import { PhotoCard } from '../../components/PhotoCard'
 
-import { useQuery, gql } from '@apollo/client'
+import { gql } from 'apollo-boost'
+import { useQuery } from '@apollo/client'
 import { useStateValue } from '../../Context'
 
 export const GET_SINGLE_PHOTO = gql`
@@ -25,7 +26,7 @@ export const PhotoCardWithQuery = ({ id }) => {
   if (loading) return <p>Loading...</p>
   if (error) {
     setTimeout(() => dispatch({ type: 'removeAuth' }))
-    return <p>error {error.message}</p>
+    return <p className='error'>error {error.message}</p>
   }
 
   const { photo = {} } = data

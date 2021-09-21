@@ -99,6 +99,9 @@
       "!src/**/styles.{js,jsx}",
       "!**/node_modules/**",
       "!src/assets/**",
+      "!src/App.js",
+      "!src/index.js",
+      "!src/Context.js",
       "!src/pages/**"
     ],
     "testMatch": [

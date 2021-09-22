@@ -11,7 +11,9 @@ module.exports = merge(config, {
       'process.env.NODE_ENV': JSON.stringify('development')
     })
   ],
+  devtool: 'source-map',
   devServer: {
+    static: './dist',
     historyApiFallback: true
   }
 })

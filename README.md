@@ -40,10 +40,11 @@
 - husky
 ##### Perfomance and test
 - Lighthouse & cypres
+- @testing-library
 ##### CI/CD 
 - Vercel
 ##### Improvments
-- [ ] unit test + coverage
+- [ ] add more tests
 - [ ] travis CI
 - [ ] i18n
 - [ ] Real BBDD

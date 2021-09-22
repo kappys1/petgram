@@ -23,7 +23,7 @@ export const FavsWithQuery = () => {
   if (loading) return <p>Loading...</p>
   if (error) {
     setTimeout(() => dispatch({ type: 'removeAuth' }))
-    return <p>error {error.message}</p>
+    return <p className='error'>error {error.message}</p>
   }
   const { favs = [] } = data
   return <ListOfFavs favs={favs} />

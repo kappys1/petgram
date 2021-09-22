@@ -1,29 +1,29 @@
 // Category.test.js
-/* global describe, it, expect */
-import React from 'react'
-// import renderer from 'react-test-renderer'
-import { render } from '@testing-library/react'
+/* global describe, it, expect  */
+import { render, screen } from '@testing-library/react'
 import { PhotoCard } from '.'
-import { MockedProvider } from '@apollo/react-testing'
 import { LIKE_PHOTO } from '../../hooks/useToggleLike'
+import { generateMock, getMockProviders } from '../../test/utils'
 
 describe('PhotoCard', () => {
+  const props = {
+    id: '1',
+    liked: false,
+    likes: 1,
+    src: ''
+  }
+  const mock = generateMock(LIKE_PHOTO, {})
   it('snapshot', () => {
-    const mocks = [
-      {
-        request: {
-          query: LIKE_PHOTO
-        },
-        result: {
-          data: {}
-        }
-      }
-    ]
-    const { asFragment } = render(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <PhotoCard id='1' liked={false} likes={0} src='' />
-      </MockedProvider>
-    )
+    const mock = generateMock(LIKE_PHOTO, {})
+    const Wrapper = getMockProviders(PhotoCard, mock, props)
+    const { asFragment } = render(Wrapper)
     expect(asFragment()).toMatchSnapshot()
+  })
+
+  it('should render PhotoCard', async () => {
+    const WrapperPhotoCard = getMockProviders(PhotoCard, mock, props)
+    render(WrapperPhotoCard)
+    const item = await screen.findAllByRole('article')
+    expect(item).toBeTruthy()
   })
 })

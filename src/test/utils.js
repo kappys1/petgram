@@ -2,6 +2,7 @@
 import React from 'react'
 import { MockedProvider } from '@apollo/react-testing'
 import { renderHook } from '@testing-library/react-hooks'
+import { Provider } from '../Context'
 
 export function getHookWrapper (hook, mocks) {
   const wrapper = ({ children }) => (
@@ -16,4 +17,21 @@ export function getHookWrapper (hook, mocks) {
   expect(result.current.loading).toBeFalsy()
   expect(result.current.error).toBeUndefined()
   return { result, waitForNextUpdate }
+}
+
+export const getMockProviders = (Element, mock, props) => (
+  <Provider>
+    <MockedProvider mocks={mock} addTypename={false}>
+      <Element {...props} />
+    </MockedProvider>
+  </Provider>
+)
+
+export const generateMock = (query, result, variables = {}, isError = false) => {
+  const request = {
+    query,
+    variables
+  }
+  const error = new Error('An error occurred')
+  return [{ request, result: { data: result }, error: isError ? error : null }]
 }

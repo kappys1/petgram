@@ -1,31 +1,37 @@
 // Category.test.js
 /* global describe, it, expect */
-import React from 'react'
-// import renderer from 'react-test-renderer'
-import { render } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import { FavsWithQuery, GET_FAVS } from '.'
-import { MockedProvider } from '@apollo/react-testing'
-import { Provider } from '../../Context'
-
-describe('ListOfFavs', () => {
-  it('snapshot', () => {
-    const mocks = [
+import { generateMock, getMockProviders } from '../../test/utils'
+describe('FavsWithQuery', () => {
+  const resultQuery = {
+    favs: [
       {
-        request: {
-          query: GET_FAVS
-        },
-        result: {
-          data: {}
-        }
+        id: '1',
+        categoryId: 12,
+        src: '',
+        likes: 2,
+        userId: 1
       }
     ]
-    const { asFragment } = render(
-      <Provider>
-        <MockedProvider mocks={mocks} addTypename={false}>
-          <FavsWithQuery />
-        </MockedProvider>
-      </Provider>
-    )
+  }
+  it('snapshot', () => {
+    const mock = generateMock(GET_FAVS, resultQuery)
+    const Wrapper = getMockProviders(FavsWithQuery, mock, {})
+    const { asFragment } = render(Wrapper)
     expect(asFragment()).toMatchSnapshot()
+  })
+  it('should render the FavsWithQuery', async () => {
+    const mock = generateMock(GET_FAVS, resultQuery)
+    const Wrapper = getMockProviders(FavsWithQuery, mock, {})
+    render(Wrapper)
+    await waitFor(() => expect(screen.getByRole('link')).toBeInTheDocument())
+  })
+
+  it('should render the error', async () => {
+    const mock = generateMock(GET_FAVS, resultQuery, {}, true)
+    const Wrapper = getMockProviders(FavsWithQuery, mock, {})
+    render(Wrapper)
+    await waitFor(() => expect(screen.getByText(/error/gm)).toBeInTheDocument())
   })
 })

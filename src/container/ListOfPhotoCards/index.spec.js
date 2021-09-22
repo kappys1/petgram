@@ -1,31 +1,35 @@
 // Category.test.js
 /* global describe, it, expect */
-import React from 'react'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { ListOfPhotoCards } from '.'
-import { Provider } from '../../Context'
-import { MockedProvider } from '@apollo/react-testing'
 import { GET_PHOTOS } from '../../hoc/withPhotos'
-
+import { generateMock, getMockProviders } from '../../test/utils'
 describe('ListOfPhotoCards', () => {
-  it('snapshot', () => {
-    const mocks = [
+  const resultQuery = {
+    photos: [
       {
-        request: {
-          query: GET_PHOTOS
-        },
-        result: {
-          data: {}
-        }
+        id: '1',
+        categoryId: 12,
+        src: '',
+        likes: 2,
+        userId: 1,
+        liked: false
       }
     ]
-    const { asFragment } = render(
-      <Provider>
-        <MockedProvider mocks={mocks} addTypename={false}>
-          <ListOfPhotoCards />
-        </MockedProvider>
-      </Provider>
-    )
+  }
+
+  it('snapshot', () => {
+    const mock = generateMock(GET_PHOTOS, resultQuery)
+    const Wrapper = getMockProviders(ListOfPhotoCards, mock)
+    const { asFragment } = render(Wrapper)
     expect(asFragment()).toMatchSnapshot()
+  })
+
+  it('should render the PhotoCard', async () => {
+    const mock = generateMock(GET_PHOTOS, resultQuery)
+    const Wrapper = getMockProviders(ListOfPhotoCards, mock, {})
+    render(Wrapper)
+    const item = await screen.findAllByRole('list')
+    expect(item).toBeTruthy()
   })
 })

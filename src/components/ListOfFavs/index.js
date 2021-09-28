@@ -3,13 +3,12 @@ import { Grid, Image, Link } from './styles'
 import { PropTypes } from 'prop-types'
 
 export const ListOfFavs = ({ favs = [] }) => {
-  console.log(favs)
   return (
     <Grid>
       {
         favs.map(fav =>
-          <Link key={fav.id} to={`/detail/${fav.id}`}>
-            <Image src={fav.src} alt={`images favs ${fav.id}`} />
+          <Link key={fav._id} to={`/detail/${fav._id}`}>
+            <Image src={fav.src} alt={`images favs ${fav._id}`} />
           </Link>
         )
       }

@@ -4,7 +4,7 @@ import { gql } from 'apollo-boost'
 const GET_PHOTOS = gql`
 query getPhotos($categoryId: ID){
   photos(categoryId: $categoryId){
-    id
+    _id
     categoryId
     src
     userId

@@ -1,35 +1,61 @@
-const db = require('../adapter')
+// const db = require('../adapter')
+const { ObjectID } = require('mongodb')
+const {
+  editElementCollection,
+  getAllElementsCollection,
+  getElementCollection
+} = require('../utils.js')
 
-function find ({id, favs = []}) {
-  const photo = db.get('photos').find({id: +id}).value()
+const photoCollection = 'photos'
+
+async function find ({ id, favs = [] }) {
+  const photo = await getElementCollection(photoCollection, id)
+  const favsParsed = favs.map(fav => fav.toString())
   return {
     ...photo,
-    liked: favs.includes(id.toString())
+    liked: favsParsed.includes(id)
   }
 }
 
-function addLike ({ id }) {
-  return db.get('photos').find({id: +id}).update('likes', likes => likes + 1).write()
+async function addLike (photo) {
+  const newPhoto = { ...photo, likes: photo.likes + 1 }
+  await editElementCollection(photoCollection, {
+    _id: ObjectID(photo._id),
+    input: {
+      $set: {
+        likes: newPhoto.likes
+      }
+    }
+  })
+  return newPhoto
 }
 
-function removeLike ({ id }) {
-  return db.get('photos').find({id: +id}).update('likes', likes => likes - 1).write()
+async function removeLike (photo) {
+  const newPhoto = { ...photo, likes: photo.likes - 1 }
+  await editElementCollection(photoCollection, {
+    _id: ObjectID(photo._id),
+    input: {
+      $set: {
+        likes: newPhoto.likes
+      }
+    }
+  })
+  return newPhoto
 }
 
-function list ({categoryId, ids, favs = []}) {
+async function list ({ categoryId, ids, favs = [] }) {
   let photos
   if (categoryId && categoryId !== 'all') {
-    photos = db.get('photos').filter({categoryId: +categoryId}).value()
+    photos = await getAllElementsCollection(photoCollection, { categoryId: ObjectID(categoryId) })
   } else if (ids) {
-    photos = db.get('photos').filter(photo => ids.includes(photo.id.toString())).value()
+    photos = await getAllElementsCollection(photoCollection, { _id: { $in: ids } })
   } else {
-    photos = db.get('photos').value()
+    photos = await getAllElementsCollection(photoCollection)
   }
-
   return photos.map(photo => ({
     ...photo,
     liked: favs.includes(photo.id.toString())
   }))
 }
 
-module.exports = { find, addLike, removeLike, list }
+module.exports = { find, addLike, removeLike, list, photoCollection }

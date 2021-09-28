@@ -2,7 +2,7 @@
 // webpack.config.js
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const WebpackPwaManifest = require('webpack-pwa-manifest')
-
+const Dotenv = require('dotenv-webpack')
 const path = require('path')
 
 module.exports = {
@@ -13,6 +13,13 @@ module.exports = {
     clean: true
   },
   plugins: [
+    new Dotenv({
+      path: '.env',
+      allowEmptyValues: true, // allow empty variables (e.g. `FOO=`) (treat it as empty string, rather than missing)
+      systemvars: true, // load all the predefined 'process.env' variables which will trump anything local per dotenv specs.
+      silent: true, // hide any errors
+      defaults: false
+    }),
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     }),

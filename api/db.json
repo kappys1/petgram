@@ -3,10 +3,7 @@
     {
       "id": "7ec3d2f0-641e-11e9-9d5d-1b8ad05606d1",
       "password": "$2a$10$jK1cANhCuUoUHs1KvtEp0.lIkUZ8qfG5.fQ/cBT3LW/D8xBIhGGaK",
-      "favs": [
-        "18",
-        "1"
-      ],
+      "favs": [],
       "avatar": "https://gravatar.com/avatar/8e04be7dab487d77f16969fd3e0d45d4",
       "email": "miduga@gmail.com"
     },
@@ -26,7 +23,7 @@
   "categories": [
     {
       "id": 1,
-      "name": "cats",
+      "name": "catssss",
       "emoji": "🐱",
       "cover": "https://res.cloudinary.com/midudev/image/upload/w_150/v1555671700/category_cats.jpg",
       "path": "/photos/cats"

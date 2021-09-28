@@ -1,4 +1,3 @@
-const db = require('../adapter')
 const crypto = require('crypto')
 const bcrypt = require('bcrypt')
 const { getElementCollection, editElementCollection, getElementCollectionByQuery, createElementIntoCollection, getAllElementsCollection } = require('../utils')

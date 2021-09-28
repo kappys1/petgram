@@ -11,7 +11,6 @@ process.env.JWT_SECRET = process.env.JWT_SECRET || 'somereallylongsecretkey'
 
 const PORT = process.env.PORT || 3500
 const app = express()
-// const { categories } = require('./db.json')
 
 app.use(cors())
 
@@ -20,8 +19,6 @@ const auth = jwt({
   secret: process.env.JWT_SECRET,
   credentialsRequired: false
 })
-
-// require('./adapter')
 
 const server = new ApolloServer({
   introspection: true, // do this only for dev purposes

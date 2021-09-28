@@ -57,6 +57,7 @@ const typeDefs = gql`
 `
 
 async function checkIsUserLogged (context) {
+  console.log(context)
   const { email, id } = context
   // check if the user is logged
   if (!id) throw new Error('you must be logged in to perform this action')
@@ -96,13 +97,13 @@ const resolvers = {
       const { _id: userId } = await checkIsUserLogged(context)
 
       // find the photo by id and throw an error if it doesn't exist
+
       const { _id: photoId } = input
       const photo = await photosModel.find({ id: photoId })
 
       if (!photo) {
         throw new Error(`Couldn't find photo with id ${photoId}`)
       }
-
       const hasFav = await userModel.hasFav({ id: userId, photoId })
       if (hasFav) {
         await photosModel.removeLike(photo)
@@ -165,7 +166,7 @@ const resolvers = {
 
       // return json web token
       return jsonwebtoken.sign(
-        { id: user.id, email: user.email },
+        { id: user._id, email: user.email },
         process.env.JWT_SECRET,
         { expiresIn: '365d' }
       )
@@ -182,13 +183,11 @@ const resolvers = {
     },
     async photo (_, { id }, context) {
       const favs = await tryGetFavsFromUserLogged(context)
-      console.log(id)
       return await photosModel.find({ id, favs })
     },
     async photos (_, { categoryId }, context) {
       const favs = await tryGetFavsFromUserLogged(context)
       const photos = await photosModel.list({ categoryId, favs })
-      console.log(photos)
       return photos
     }
   }

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserFormRedirect snapshot 1`] = `
+<DocumentFragment>
+  <article
+    class="sc-bdfBQB buuhHs"
+  >
+    <a
+      class="sc-gsTEea LOaQs"
+      href="/login"
+    >
+      ¿Tienes una cuenta? 
+      <b>
+        Inicia Sesion
+      </b>
+    </a>
+  </article>
+</DocumentFragment>
+`;

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Category snapshot 1`] = `
+<DocumentFragment>
+  <a
+    class="sc-bdfBQB TyDmP"
+    href="/#"
+  >
+    <img
+      alt="category image ?"
+      class="sc-gsTEea cqupgU"
+      src="https://i.imgur.com/dJa0Hpl.jpeg"
+    />
+    ?
+  </a>
+</DocumentFragment>
+`;

@@ -1,7 +1,7 @@
-import { graphql } from 'react-apollo'
+import { graphql } from '@apollo/client/react/hoc'
 import { gql } from 'apollo-boost'
 
-const GET_PHOTOS = gql`
+export const GET_PHOTOS = gql`
 query getPhotos($categoryId: ID){
   photos(categoryId: $categoryId){
     _id

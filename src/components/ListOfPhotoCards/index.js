@@ -5,7 +5,7 @@ import { PhotoCard } from '../PhotoCard'
 export const ListOfPhotoCardsComponent = ({ data: { photos = [] } }) => {
   return (
     <List>
-      {photos.map(photo => <li key={photo.id}><PhotoCard {...photo} /></li>)}
+      {photos.map(photo => <li key={photo._id}><PhotoCard {...photo} /></li>)}
     </List>
   )
 }

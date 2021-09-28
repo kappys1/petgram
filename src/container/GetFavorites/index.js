@@ -6,8 +6,8 @@ import { useStateValue } from '../../Context'
 
 export const GET_FAVS = gql`
 query getFavs{
-  favs{
-    id
+  favs {
+    _id
     categoryId
     src
     userId

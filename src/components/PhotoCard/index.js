@@ -8,13 +8,13 @@ import { useToggleLike } from '../../hooks/useToggleLike'
 const DEFAULT_IMAGE =
   'https://res.cloudinary.com/midudev/image/upload/w_300/q_80/v1560262103/dogs.png'
 
-export const PhotoCard = ({ id, liked, likes = 0, src = DEFAULT_IMAGE }) => {
+export const PhotoCard = ({ _id, liked, likes = 0, src = DEFAULT_IMAGE }) => {
   const [show, ref] = useNearScreen(false)
   const { toggleLike } = useToggleLike()
   const handleFavClick = () => {
     toggleLike({
       variables: {
-        input: { id }
+        input: { _id }
       }
     })
   }
@@ -22,9 +22,9 @@ export const PhotoCard = ({ id, liked, likes = 0, src = DEFAULT_IMAGE }) => {
     <Article ref={ref}>
       {show && (
         <>
-          <Link to={`/detail/${id}`}>
+          <Link to={`/detail/${_id}`}>
             <ImgWrapper>
-              <Img src={src} alt={`Photo card ${id}`} />
+              <Img src={src} alt={`Photo card ${_id}`} />
             </ImgWrapper>
           </Link>
           <FavButton likes={likes} liked={liked} onClick={handleFavClick} />

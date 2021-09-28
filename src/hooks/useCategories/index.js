@@ -6,7 +6,7 @@ export const useCategoriesData = () => {
 
   useEffect(function () {
     setLoading(true)
-    window.fetch('https://petgram-server-kappys-5p5zyiegt-kappys1.vercel.app/categories')
+    window.fetch(`${process.env.API_DOMAIN}/categories`/* 'https://petgram-server-kappys-5p5zyiegt-kappys1.vercel.app/categories' */)
       .then(res => res.json())
       .then(response => {
         setLoading(false)

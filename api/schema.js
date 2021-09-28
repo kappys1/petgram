@@ -141,7 +141,7 @@ const resolvers = {
       return jsonwebtoken.sign(
         { id: newUser._id, email: newUser.email },
         process.env.JWT_SECRET,
-        { expiresIn: '1y' }
+        { expiresIn: '365d' }
       )
     },
 
@@ -167,7 +167,7 @@ const resolvers = {
       return jsonwebtoken.sign(
         { id: user.id, email: user.email },
         process.env.JWT_SECRET,
-        { expiresIn: '1d' }
+        { expiresIn: '365d' }
       )
     }
   },

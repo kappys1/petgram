@@ -44,10 +44,13 @@
 ##### CI/CD 
 - Vercel
 ##### Improvments
-- [ ] add more tests
-- [ ] travis CI
+- [x] Some tests
+- [x] videos
+- [x] Real Mongo BBDD
+
+##### to improve
 - [ ] i18n
-- [ ] Real BBDD
+- [ ] Coverage
 ### requistes
 - node ~12
 - npm ~6

@@ -1,6 +1,6 @@
 const userModel = require('./models/userModel')
 const categoriesModel = require('./models/categoriesModel')
-const photosModel = require('./models/photosModel')
+const mediasModel = require('./models/mediasModel')
 const { gql } = require('apollo-server-express')
 const jsonwebtoken = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
@@ -15,13 +15,19 @@ const typeDefs = gql`
     isPremium: Boolean
   }
 
-  type Photo {
+  enum MediaTypes {
+    video
+    photo
+  }
+
+  type Media {
     _id: ID!
     categoryId: ID
     src: String
     likes: Int
     liked: Boolean
     userId: ID
+    type: MediaTypes
   }
 
   type Category {
@@ -33,13 +39,13 @@ const typeDefs = gql`
   }
 
   type Query {
-    favs: [Photo]
+    favs: [Media]
     categories: [Category]
-    photos(categoryId: ID): [Photo],
-    photo(id: ID!): Photo
+    medias(categoryId: ID): [Media],
+    media(id: ID!): Media
   }
 
-  input LikePhoto {
+  input LikeMedia {
     _id: ID!
   }
 
@@ -49,8 +55,8 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    likeAnonymousPhoto (input: LikePhoto!): Photo
-    likePhoto (input: LikePhoto!): Photo
+    likeAnonymousMedia (input: LikeMedia!): Media
+    likeMedia (input: LikeMedia!): Media
     signup (input: UserCredentials!): String
     login (input: UserCredentials!): String
   }
@@ -80,46 +86,46 @@ async function tryGetFavsFromUserLogged (context) {
 
 const resolvers = {
   Mutation: {
-    likeAnonymousPhoto: async (_, { input }) => {
-      // find the photo by id and throw an error if it doesn't exist
-      const { id: photoId } = input
-      const photo = await photosModel.find({ id: photoId })
-      if (!photo) {
-        throw new Error(`Couldn't find photo with id ${photoId}`)
+    likeAnonymousMedia: async (_, { input }) => {
+      // find the media by id and throw an error if it doesn't exist
+      const { id: mediaId } = input
+      const media = await mediasModel.find({ id: mediaId })
+      if (!media) {
+        throw new Error(`Couldn't find media with id ${mediaId}`)
       }
-      // put a like to the photo
-      photosModel.addLike(photo)
-      // get the updated photos model
-      const actualPhoto = photosModel.find({ id: photoId })
-      return actualPhoto
+      // put a like to the media
+      mediasModel.addLike(media)
+      // get the updated medias model
+      const actualMedia = mediasModel.find({ id: mediaId })
+      return actualMedia
     },
-    likePhoto: async (_, { input }, context) => {
+    likeMedia: async (_, { input }, context) => {
       const { _id: userId } = await checkIsUserLogged(context)
 
-      // find the photo by id and throw an error if it doesn't exist
+      // find the media by id and throw an error if it doesn't exist
 
-      const { _id: photoId } = input
-      const photo = await photosModel.find({ id: photoId })
+      const { _id: mediaId } = input
+      const media = await mediasModel.find({ id: mediaId })
 
-      if (!photo) {
-        throw new Error(`Couldn't find photo with id ${photoId}`)
+      if (!media) {
+        throw new Error(`Couldn't find media with id ${mediaId}`)
       }
-      const hasFav = await userModel.hasFav({ id: userId, photoId })
+      const hasFav = await userModel.hasFav({ id: userId, mediaId })
       if (hasFav) {
-        await photosModel.removeLike(photo)
-        await userModel.removeFav({ id: userId, photoId })
+        await mediasModel.removeLike(media)
+        await userModel.removeFav({ id: userId, mediaId })
       } else {
-        // put a like to the photo and add the like to the user database
-        await photosModel.addLike(photo)
-        await userModel.addFav({ id: userId, photoId })
+        // put a like to the media and add the like to the user database
+        await mediasModel.addLike(media)
+        await userModel.addFav({ id: userId, mediaId })
       }
 
       // get favs from user before exiting
       const favs = await tryGetFavsFromUserLogged(context)
-      // get the updated photos model
-      const actualPhoto = await photosModel.find({ id: photoId, favs })
+      // get the updated medias model
+      const actualMedia = await mediasModel.find({ id: mediaId, favs })
 
-      return actualPhoto
+      return actualMedia
     },
     // Handle user signup
     async signup (_, { input }) {
@@ -176,19 +182,20 @@ const resolvers = {
     async favs (_, __, context) {
       const { email } = await checkIsUserLogged(context)
       const { favs } = await userModel.find({ email })
-      return await photosModel.list({ ids: favs, favs })
+      return await mediasModel.list({ ids: favs, favs })
     },
     async categories (_) {
       return await categoriesModel.list()
     },
-    async photo (_, { id }, context) {
+    async media (_, { id }, context) {
       const favs = await tryGetFavsFromUserLogged(context)
-      return await photosModel.find({ id, favs })
+      return await mediasModel.find({ id, favs })
     },
-    async photos (_, { categoryId }, context) {
+    async medias (_, { categoryId }, context) {
       const favs = await tryGetFavsFromUserLogged(context)
-      const photos = await photosModel.list({ categoryId, favs })
-      return photos
+      const medias = await mediasModel.list({ categoryId, favs })
+      console.log(medias)
+      return medias
     }
   }
 }

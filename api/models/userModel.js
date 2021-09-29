@@ -2,40 +2,40 @@ const crypto = require('crypto')
 const bcrypt = require('bcrypt')
 const { getElementCollection, editElementCollection, getElementCollectionByQuery, createElementIntoCollection, getAllElementsCollection } = require('../utils')
 const { ObjectID } = require('mongodb')
-const { photoCollection } = require('./photosModel')
+const { mediaCollection } = require('./mediasModel')
 
 const userCollections = 'users'
 
-async function addFav ({ id, photoId }) {
-  const photo = await getElementCollection(photoCollection, ObjectID(photoId))
+async function addFav ({ id, mediaId }) {
+  const media = await getElementCollection(mediaCollection, ObjectID(mediaId))
   const user = await getElementCollection(userCollections, ObjectID(id))
-  if (!photo || !user) {
+  if (!media || !user) {
     throw new Error('La persona o el curso no exite')
   }
   await editElementCollection(userCollections, {
     _id: ObjectID(id),
-    input: { $addToSet: { favs: ObjectID(photoId) } }
+    input: { $addToSet: { favs: ObjectID(mediaId) } }
   })
 }
 
-async function removeFav ({ id, photoId }) {
-  // db.get('users').find({ id }).update('favs', favs => favs.filter(fav => fav !== photoId)).write()
-  const photo = await getElementCollection(photoCollection, ObjectID(photoId))
+async function removeFav ({ id, mediaId }) {
+  // db.get('users').find({ id }).update('favs', favs => favs.filter(fav => fav !== mediaId)).write()
+  const media = await getElementCollection(mediaCollection, ObjectID(mediaId))
   const user = await getElementCollection(userCollections, ObjectID(id))
-  if (!photo || !user) {
+  if (!media || !user) {
     throw new Error('La persona o el curso no exite')
   }
   await editElementCollection(userCollections, {
     _id: ObjectID(id),
-    input: { $pull: { favs: ObjectID(photoId) } }
+    input: { $pull: { favs: ObjectID(mediaId) } }
   })
 }
 
-async function hasFav ({ id, photoId }) {
+async function hasFav ({ id, mediaId }) {
   // const user = db.get('users').find({ id }).value()
   const user = await getElementCollection(userCollections, id)
   const favParses = user.favs.map(fav => fav.toString())
-  const hasFav = favParses.includes(photoId)
+  const hasFav = favParses.includes(mediaId)
 
   return hasFav
 }

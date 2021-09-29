@@ -2,11 +2,11 @@
 /* global describe, it, expect */
 import { render, screen } from '@testing-library/react'
 import { ListOfPhotoCards } from '.'
-import { GET_PHOTOS } from '../../hoc/withPhotos'
+import { GET_PHOTOS } from '../../hoc/withMedias'
 import { generateMock, getMockProviders } from '../../test/utils'
 describe('ListOfPhotoCards', () => {
   const resultQuery = {
-    photos: [
+    medias: [
       {
         id: '1',
         categoryId: 12,

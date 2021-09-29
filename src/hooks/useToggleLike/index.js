@@ -2,8 +2,8 @@ import { useMutation } from '@apollo/client'
 import { gql } from 'apollo-boost'
 
 export const LIKE_PHOTO = gql`
-mutation likePhoto($input: LikePhoto!) {
-  likePhoto(input: $input) {
+mutation likeMedia($input: LikeMedia!) {
+  likeMedia(input: $input) {
     _id,
     liked,
     likes

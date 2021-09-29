@@ -3,8 +3,8 @@ import { gql } from 'apollo-boost'
 import { Mutation } from 'react-apollo'
 
 const LIKE_PHOTO = gql`
-mutation likePhoto($input: LikePhoto!) {
-  likePhoto(input: $input) {
+mutation likeMedia($input: LikeMedia!) {
+  likeMedia(input: $input) {
     _id,
     liked,
     likes

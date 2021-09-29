@@ -6,8 +6,8 @@ import { useQuery } from '@apollo/client'
 import { useStateValue } from '../../Context'
 
 export const GET_SINGLE_PHOTO = gql`
-query getSinglePhoto($id:ID!) {
-  photo(id:$id) {
+query getSingleMedia($id:ID!) {
+  media(id:$id) {
     _id
     categoryId
     src
@@ -29,6 +29,6 @@ export const PhotoCardWithQuery = ({ id }) => {
     return <p className='error'>error {error.message}</p>
   }
 
-  const { photo = {} } = data
-  return <PhotoCard {...photo} />
+  const { media = {} } = data
+  return <PhotoCard {...media} />
 }

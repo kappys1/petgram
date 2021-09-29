@@ -6,7 +6,7 @@ import { generateMock, getMockProviders } from '../../test/utils'
 
 describe('PhotoCardWithQuery', () => {
   const resultQuery = {
-    photo: {
+    media: {
       id: '1',
       categoryId: 12,
       src: '',

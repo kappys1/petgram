@@ -6,8 +6,9 @@ import { ApolloProvider } from '@apollo/client'
 import { Provider } from './Context'
 import * as serviceWorker from './serviceWorker'
 
+const uri = process.env.GRAPH_QL_URL
 const client = new ApolloClient({
-  uri: 'https://petgram-server-kappys-5p5zyiegt-kappys1.vercel.app/graphql',
+  uri: uri, // 'https://petgram-server-kappys-5p5zyiegt-kappys1.vercel.app/graphql',
   request: operation => {
     const token = window.sessionStorage.getItem('token')
     const authorization = token ? `Bearer ${token}` : ''

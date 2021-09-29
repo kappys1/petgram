@@ -1,30 +1,37 @@
 const userModel = require('./models/userModel')
 const categoriesModel = require('./models/categoriesModel')
-const photosModel = require('./models/photosModel')
+const mediasModel = require('./models/mediasModel')
 const { gql } = require('apollo-server-express')
 const jsonwebtoken = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
 const typeDefs = gql`
   type User {
-    id: ID
+    _id: ID!
     avatar: String
     name: String
     email: String
+    favs: [ID!]
     isPremium: Boolean
   }
 
-  type Photo {
-    id: ID
-    categoryId: Int
+  enum MediaTypes {
+    video
+    photo
+  }
+
+  type Media {
+    _id: ID!
+    categoryId: ID
     src: String
     likes: Int
     liked: Boolean
     userId: ID
+    type: MediaTypes
   }
 
   type Category {
-    id: ID
+    _id: ID!
     cover: String
     name: String
     emoji: String
@@ -32,14 +39,14 @@ const typeDefs = gql`
   }
 
   type Query {
-    favs: [Photo]
+    favs: [Media]
     categories: [Category]
-    photos(categoryId: ID): [Photo],
-    photo(id: ID!): Photo
+    medias(categoryId: ID): [Media],
+    media(id: ID!): Media
   }
 
-  input LikePhoto {
-    id: ID!
+  input LikeMedia {
+    _id: ID!
   }
 
   input UserCredentials {
@@ -48,86 +55,86 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    likeAnonymousPhoto (input: LikePhoto!): Photo
-    likePhoto (input: LikePhoto!): Photo
+    likeAnonymousMedia (input: LikeMedia!): Media
+    likeMedia (input: LikeMedia!): Media
     signup (input: UserCredentials!): String
     login (input: UserCredentials!): String
   }
 `
 
-function checkIsUserLogged (context) {
-  const {email, id} = context
+async function checkIsUserLogged (context) {
+  console.log(context)
+  const { email, id } = context
   // check if the user is logged
   if (!id) throw new Error('you must be logged in to perform this action')
   // find the user and check if it exists
-  const user = userModel.find({email})
+  const user = await userModel.find({ email })
   // if user doesnt exist, throw an error
   if (!user) throw new Error('user does not exist')
   return user
 }
 
-function tryGetFavsFromUserLogged (context) {
+async function tryGetFavsFromUserLogged (context) {
   try {
-    const {email} = checkIsUserLogged(context)
-    const user = userModel.find({email})
+    const { email } = await checkIsUserLogged(context)
+    const user = await userModel.find({ email })
     return user.favs
-  } catch(e) {
+  } catch (e) {
     return []
   }
 }
 
 const resolvers = {
   Mutation: {
-    likeAnonymousPhoto: (_, {input}) => {
-      // find the photo by id and throw an error if it doesn't exist
-      const {id: photoId} = input
-      const photo = photosModel.find({ id: photoId })
-      if (!photo) {
-        throw new Error(`Couldn't find photo with id ${photoId}`)
+    likeAnonymousMedia: async (_, { input }) => {
+      // find the media by id and throw an error if it doesn't exist
+      const { id: mediaId } = input
+      const media = await mediasModel.find({ id: mediaId })
+      if (!media) {
+        throw new Error(`Couldn't find media with id ${mediaId}`)
       }
-      // put a like to the photo
-      photosModel.addLike({ id: photoId })
-      // get the updated photos model
-      const actualPhoto = photosModel.find({ id: photoId })
-      return actualPhoto
+      // put a like to the media
+      mediasModel.addLike(media)
+      // get the updated medias model
+      const actualMedia = mediasModel.find({ id: mediaId })
+      return actualMedia
     },
-    likePhoto: (_, { input }, context) => {
-      const { id: userId } = checkIsUserLogged(context)
+    likeMedia: async (_, { input }, context) => {
+      const { _id: userId } = await checkIsUserLogged(context)
 
-      // find the photo by id and throw an error if it doesn't exist
-      const {id: photoId} = input
-      const photo = photosModel.find({ id: photoId })
-      if (!photo) {
-        throw new Error(`Couldn't find photo with id ${photoId}`)
+      // find the media by id and throw an error if it doesn't exist
+
+      const { _id: mediaId } = input
+      const media = await mediasModel.find({ id: mediaId })
+
+      if (!media) {
+        throw new Error(`Couldn't find media with id ${mediaId}`)
       }
-
-      const hasFav = userModel.hasFav({ id: userId, photoId })
-
+      const hasFav = await userModel.hasFav({ id: userId, mediaId })
       if (hasFav) {
-        photosModel.removeLike({ id: photoId })
-        userModel.removeFav({ id: userId, photoId, })
+        await mediasModel.removeLike(media)
+        await userModel.removeFav({ id: userId, mediaId })
       } else {
-        // put a like to the photo and add the like to the user database
-        photosModel.addLike({ id: photoId })
-        userModel.addFav({ id: userId, photoId, })
+        // put a like to the media and add the like to the user database
+        await mediasModel.addLike(media)
+        await userModel.addFav({ id: userId, mediaId })
       }
 
       // get favs from user before exiting
-      const favs = tryGetFavsFromUserLogged(context)
-      // get the updated photos model
-      const actualPhoto = photosModel.find({ id: photoId, favs })
+      const favs = await tryGetFavsFromUserLogged(context)
+      // get the updated medias model
+      const actualMedia = await mediasModel.find({ id: mediaId, favs })
 
-      return actualPhoto
+      return actualMedia
     },
     // Handle user signup
     async signup (_, { input }) {
       // add 1 second of delay in order to see loading stuff
-      await new Promise(resolve => setTimeout(resolve, 1000))
+      // await new Promise(resolve => setTimeout(resolve, 1000))
 
-      const {email, password} = input
+      const { email, password } = input
 
       const user = await userModel.find({ email })
-
       if (user) {
         throw new Error('User already exists')
       }
@@ -139,9 +146,9 @@ const resolvers = {
 
       // return json web token
       return jsonwebtoken.sign(
-        { id: newUser.id, email: newUser.email },
+        { id: newUser._id, email: newUser.email },
         process.env.JWT_SECRET,
-        { expiresIn: '1y' }
+        { expiresIn: '365d' }
       )
     },
 
@@ -165,28 +172,30 @@ const resolvers = {
 
       // return json web token
       return jsonwebtoken.sign(
-        { id: user.id, email: user.email },
+        { id: user._id, email: user.email },
         process.env.JWT_SECRET,
-        { expiresIn: '1d' }
+        { expiresIn: '365d' }
       )
     }
   },
   Query: {
-    favs(_, __, context) {
-      const {email} = checkIsUserLogged(context)
-      const {favs} = userModel.find({email})
-      return photosModel.list({ ids: favs, favs })
+    async favs (_, __, context) {
+      const { email } = await checkIsUserLogged(context)
+      const { favs } = await userModel.find({ email })
+      return await mediasModel.list({ ids: favs, favs })
     },
-    categories() {
-      return categoriesModel.list()
+    async categories (_) {
+      return await categoriesModel.list()
     },
-    photo(_, {id}, context) {
-      const favs = tryGetFavsFromUserLogged(context)
-      return photosModel.find({id, favs})
+    async media (_, { id }, context) {
+      const favs = await tryGetFavsFromUserLogged(context)
+      return await mediasModel.find({ id, favs })
     },
-    photos(_, {categoryId}, context) {
-      const favs = tryGetFavsFromUserLogged(context)
-      return photosModel.list({categoryId, favs})
+    async medias (_, { categoryId }, context) {
+      const favs = await tryGetFavsFromUserLogged(context)
+      const medias = await mediasModel.list({ categoryId, favs })
+      console.log(medias)
+      return medias
     }
   }
 }

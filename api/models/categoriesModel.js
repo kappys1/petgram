@@ -1,7 +1,10 @@
-const db = require('../adapter')
-
+// const db = require('../adapter')
+const {
+  getAllElementsCollection
+} = require('../utils.js')
+const categoriesCollection = 'categories'
 function list () {
-  return db.get('categories').value()
+  return getAllElementsCollection(categoriesCollection)
 }
 
-module.exports = { list }
+module.exports = { list, categoriesCollection }

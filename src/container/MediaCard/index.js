@@ -4,22 +4,24 @@ import { PhotoCard } from '../../components/PhotoCard'
 import { gql } from 'apollo-boost'
 import { useQuery } from '@apollo/client'
 import { useStateValue } from '../../Context'
+import { VideoCard } from '../../components/VideoCard'
 
-export const GET_SINGLE_PHOTO = gql`
-query getSinglePhoto($id:ID!) {
-  photo(id:$id) {
-    id
+export const GET_SINGLE_MEDIA = gql`
+query getSingleMedia($id:ID!) {
+  media(id:$id) {
+    _id
     categoryId
     src
     likes
     userId
     liked
+    type
   }
 }`
 
-export const PhotoCardWithQuery = ({ id }) => {
+export const MediaCardWithQuery = ({ id }) => {
   const [, dispatch] = useStateValue()
-  const { loading, error, data } = useQuery(GET_SINGLE_PHOTO, {
+  const { loading, error, data } = useQuery(GET_SINGLE_MEDIA, {
     variables: { id }
   })
 
@@ -29,6 +31,6 @@ export const PhotoCardWithQuery = ({ id }) => {
     return <p className='error'>error {error.message}</p>
   }
 
-  const { photo = {} } = data
-  return <PhotoCard {...photo} />
+  const { media = {} } = data
+  return media.type === 'video' ? <VideoCard {...media} /> : <PhotoCard {...media} />
 }

@@ -1,15 +1,16 @@
+require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const { ApolloServer } = require('apollo-server-express')
 const { resolvers, typeDefs } = require('./schema')
 const jwt = require('express-jwt')
+const categoriesModel = require('./models/categoriesModel')
 
 // this is not secure! this is for dev purposes
 process.env.JWT_SECRET = process.env.JWT_SECRET || 'somereallylongsecretkey'
 
 const PORT = process.env.PORT || 3500
 const app = express()
-const { categories } = require('./db.json')
 
 app.use(cors())
 
@@ -18,8 +19,6 @@ const auth = jwt({
   secret: process.env.JWT_SECRET,
   credentialsRequired: false
 })
-
-require('./adapter')
 
 const server = new ApolloServer({
   introspection: true, // do this only for dev purposes
@@ -44,7 +43,8 @@ const errorHandler = (err, req, res, next) => {
 app.use(errorHandler)
 server.applyMiddleware({ app, path: '/graphql' })
 
-app.get('/categories', function (req, res) {
+app.get('/categories', async function (req, res) {
+  const categories = await categoriesModel.list()
   res.send(categories)
 })
 

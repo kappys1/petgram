@@ -22,8 +22,8 @@ const ListOfCategoriesComponents = () => {
       {loading
         ? <Item key='loading'><Category /></Item>
         : categories.map((category) => (
-          <Item key={category.id}>
-            <Category {...category} path={`/pet/${category.id}`} />
+          <Item key={category._id}>
+            <Category {...category} path={`/pet/${category._id}`} />
           </Item>
         ))}
     </List>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { ListOfCategories } from '../components/ListOfCategories'
-import { ListOfPhotoCards } from '../container/ListOfPhotoCards'
+import { ListOfMediaCards } from '../container/ListOfMediasCards'
 import { Helmet } from 'react-helmet'
 import { SectionInApp } from '../components/Layout/styles'
 
@@ -12,7 +12,7 @@ export const HomePage = ({ categoryId }) => {
         <meta name='description' content='Con Petgram puedes encontrar fotos de animales domesticos muy bonitos' />
       </Helmet>
       <ListOfCategories />
-      <ListOfPhotoCards categoryId={categoryId} />
+      <ListOfMediaCards categoryId={categoryId} />
     </SectionInApp>
   )
 }

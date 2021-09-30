@@ -10,7 +10,6 @@ const ListOfCategoriesComponents = () => {
   useEffect(function () {
     const scrollElement = document.getElementById('app')
     const onScroll = e => {
-      console.log(scrollElement.scrollTop)
       const newShowFixed = scrollElement.scrollTop > 200
       showFixed !== newShowFixed && setShowFixed(newShowFixed)
     }

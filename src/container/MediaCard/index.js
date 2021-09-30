@@ -16,6 +16,7 @@ query getSingleMedia($id:ID!) {
     userId
     liked
     type
+    description
   }
 }`
 

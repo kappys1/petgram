@@ -52,9 +52,11 @@ async function list ({ categoryId, ids, favs = [] }) {
   } else {
     medias = await getAllElementsCollection(mediaCollection)
   }
+  const favTransforms = favs.map(fav => fav.toString())
   return medias.map(media => ({
     ...media,
-    liked: favs.includes(media._id.toString())
+    liked: favTransforms.includes(media._id.toString()),
+    cover: media.cover || ''
   }))
 }
 

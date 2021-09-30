@@ -7,6 +7,7 @@ export const List = styled.ul`
   overflow: auto;
   width: 100%;
   margin-bottom: 1rem;
+  padding-left: 1rem;
   ${props => props.fixed && css`
     background: #fff;
     border-radius: 60px;

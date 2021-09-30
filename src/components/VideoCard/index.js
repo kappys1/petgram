@@ -1,51 +1,45 @@
-import React, { useEffect, useRef } from 'react'
-import { Article, ImgWrapper, PlayIcon, Video } from './styles'
-import { useNearScreen } from '../../hooks/useNearScreen'
-import { FavButton } from '../FavButton'
+import React, { useRef, useState } from 'react'
+import { FullScreenIcon, PlayIcon, Video } from './styles'
 import { PropTypes } from 'prop-types'
-import { useToggleLike } from '../../hooks/useToggleLike'
 import useIntersectionVideoPlayer from '../../hooks/useIntersectionVideoPlayer'
+import { Card } from '../Card'
+import useFullscreenStatus from '../../hooks/useFullScreenStatus'
 const DEFAULT_COVER =
   'https://res.cloudinary.com/midudev/image/upload/w_300/q_80/v1560262103/dogs.png'
 
-export const VideoCard = ({ _id, liked, likes = 0, src = '', cover = DEFAULT_COVER }) => {
+export const VideoCard = (props) => {
+  const { _id, src = '', cover = DEFAULT_COVER } = props
   const video = useRef(null)
-  const [show, ref] = useNearScreen(false)
   const { playing, handlePlay } = useIntersectionVideoPlayer({ video })
-  const { toggleLike } = useToggleLike()
-  const handleFavClick = () => {
-    toggleLike({
-      variables: {
-        input: { _id }
-      }
-    })
-  }
-  useEffect(() => {
+  const [isFullScreen, setFullscreen] = useFullscreenStatus(video)
+  const [show, setShow] = useState(false)
+  const handleShow = (show) => {
     if (!playing && show) {
       handlePlay()
     }
-  }, [show])
-
+    setShow(show)
+  }
+  const toggleFullScreen = () => {
+    setFullscreen(true)
+  }
   return (
-    <Article ref={ref}>
-      {show && (
-        <>
-          <ImgWrapper>
-            <Video
-              muted
-              id={_id}
-              controls={false}
-              loop
-              onClick={handlePlay}
-              ref={video}
-              src={src} alt={`Photo card ${_id}`}
-            />
-            {show && !playing && (<PlayIcon onClick={handlePlay} />)}
-          </ImgWrapper>
-          <FavButton likes={likes} liked={liked} onClick={handleFavClick} />
-        </>
-      )}
-    </Article>
+    <>
+      <Card {...props} onShow={handleShow}>
+        <Video
+          id={_id}
+          controls={isFullScreen}
+          loop
+          onClick={handlePlay}
+          ref={video}
+          cover={cover}
+          src={src} alt={`Photo card ${_id}`}
+        />
+        {show && !playing && (<PlayIcon onClick={handlePlay} />)}
+        <FullScreenIcon onClick={toggleFullScreen}>Full screen</FullScreenIcon>
+      </Card>
+
+    </>
+
   )
 }
 

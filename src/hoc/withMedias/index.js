@@ -11,6 +11,7 @@ query getMedias($categoryId: ID){
     liked
     likes
     type
+    description
   }
 }
 `

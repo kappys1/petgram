@@ -47,6 +47,7 @@
 - [x] Some tests
 - [x] videos
 - [x] Real Mongo BBDD
+- [x] Full Screen videos
 
 ##### to improve
 - [ ] i18n

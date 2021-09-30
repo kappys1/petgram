@@ -28,6 +28,8 @@ const typeDefs = gql`
     liked: Boolean
     userId: ID
     type: MediaTypes
+    cover: String,
+    description: String
   }
 
   type Category {
@@ -63,7 +65,6 @@ const typeDefs = gql`
 `
 
 async function checkIsUserLogged (context) {
-  console.log(context)
   const { email, id } = context
   // check if the user is logged
   if (!id) throw new Error('you must be logged in to perform this action')
@@ -194,7 +195,6 @@ const resolvers = {
     async medias (_, { categoryId }, context) {
       const favs = await tryGetFavsFromUserLogged(context)
       const medias = await mediasModel.list({ categoryId, favs })
-      console.log(medias)
       return medias
     }
   }
